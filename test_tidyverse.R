@@ -48,3 +48,67 @@ nhanes_small %>%
   select(phys_active) %>%
   rename(physically_active = phys_active)
 
+
+nhanes_small %>%
+  select(bp_sys_ave)
+
+nhanes_small %>%
+  select(education)
+
+nhanes_small <- nhanes_small %>%
+  rename(
+    bp_sys = bp_sys_ave,
+    bp_dia = bp_dia_ave
+  )
+
+# select(nhanes_small, bmi, contains("age"))
+
+nhanes_small %>%
+  select(bmi, age)
+
+# blood_pressure <- select(nhanes_small, starts_with("bp_"))
+# rename(blood_pressure, bp_systolic = bp_sys)
+
+nhanes_small %>%
+  select(starts_with("bp_")) %>%
+  rename(bp_systolic = bp_sys)
+
+
+# Filtering rows ----------------------------------------------------------
+nhanes_small %>%
+  filter(phys_active == "No")
+nhanes_small %>%
+  filter(bmi >= 25 & phys_active == "No")
+dim(n)
+dim(nhanes_small)
+
+nhanes_small %>%
+  filter(bmi == 25 | phys_active == "No")
+
+
+
+# Arranging rows ----------------------------------------------------------
+
+# Arranging data by age in ascending order
+nhanes_small %>%
+  arrange(age)
+
+nhanes_small %>%
+  arrange(education)
+
+# Mutating columns --------------------------------------------------------
+nhanes_small %>%
+  mutate(age_months = age * 12)
+
+nhanes_small %>%
+  mutate(logged_bmi = log(bmi))
+
+nhanes_small_update <- nhanes_small %>%
+  mutate(
+    age_months = age * 12,
+    logged_bmi = log(bmi),
+    age_weeks = age_months * 4,
+    age_ = ifelse(age >= 30, "old", "young")
+  )
+
+

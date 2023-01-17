@@ -112,3 +112,24 @@ nhanes_small_update <- nhanes_small %>%
   )
 
 
+
+# 1. BMI between 20 and 40, with diabetes
+nhanes_small %>%
+    filter(bmi >= 20 & bmi <= 40 & diabetes == "Yes")
+
+
+
+
+nhanes_small %>%
+    mutate(mean_arterial_pressue=(2*bp_dia)+bp_sys)/3
+nhanes_small %>%
+    mutate(young_child= ifelse(age <=6, "yes", "no"))
+
+
+
+
+
+
+
+
+    (DBP = bp_dia_ave and SBP = bp_sys_ave) to calculate Mean Arterial Pressure. Hint: In R, use + to add, * to multiply, and / to divide.

@@ -1,3 +1,4 @@
+#example of a conflict
 10
 1+1
 
@@ -42,6 +43,7 @@ hhjjk
 # test 2
 
 test 3
+
 
 
 

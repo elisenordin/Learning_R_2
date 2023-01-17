@@ -115,21 +115,63 @@ nhanes_small_update <- nhanes_small %>%
 
 # 1. BMI between 20 and 40, with diabetes
 nhanes_small %>%
-    filter(bmi >= 20 & bmi <= 40 & diabetes == "Yes")
-
-
+  filter(bmi >= 20 & bmi <= 40 & diabetes == "Yes")
 
 
 nhanes_small %>%
-    mutate(mean_arterial_pressue=(2*bp_dia)+bp_sys)/3
+  mutate(mean_arterial_pressue = (2 * bp_dia) + bp_sys) / 3
 nhanes_small %>%
-    mutate(young_child= ifelse(age <=6, "yes", "no"))
+  mutate(young_child = ifelse(age <= 6, "yes", "no"))
 
 
 
+# Summarizing -------------------------------------------------------------
+nhanes_small %>%
+  summarise(max_bmi = max(bmi))
+
+nhanes_small %>%
+  summarise(max_bmi = max(bmi, na.rm = TRUE))
+
+nhanes_small %>%
+  summarise(
+    max_bmi = max(bmi, na.rm = TRUE),
+    min_bmi = min(bmi, na.rm = TRUE)
+  )
 
 
+# 1.
+# nhanes_small %>%
+#     summarise(mean_bp_sys = ___,
+#               mean_age = ___)
+
+# 2.
+nhanes_small %>%
+  summarise(
+    max_bp_dia = bp_dia, na.rm = TRUE,
+    min_bp_dia = bp_sys, na.rm = TRUE
+  )
+
+nhanes_small %>%
+  group_by(diabetes) %>%
+  summarise(
+    mean_age = mean(age, na.rm = TRUE),
+    mean_bmi = mean(bmi, na.rm = TRUE)
+  )
 
 
+nhanes_small %>%
+  # Recall ! means "NOT", so !is.na means "is not missing"
+  filter(!is.na(diabetes)) %>%
+  group_by(diabetes) %>%
+  summarise(
+    mean_age = mean(age, na.rm = TRUE),
+    mean_bmi = mean(bmi, na.rm = TRUE)
+  )
 
-    (DBP = bp_dia_ave and SBP = bp_sys_ave) to calculate Mean Arterial Pressure. Hint: In R, use + to add, * to multiply, and / to divide.
+nhanes_small %>%
+  filter(!is.na(diabetes)) %>%
+  group_by(diabetes, phys_active) %>%
+  summarise(
+    mean_age = mean(age, na.rm = TRUE),
+    mean_bmi = mean(bmi, na.rm = TRUE)
+  )

@@ -23,6 +23,7 @@ nhanes_small <- select(
   PhysActive, BPSysAve, BPDiaAve, Education
 )
 
+# Fixing variable names ---------------------------------------------------
 
 # View the new data frame
 nhanes_small
@@ -33,3 +34,17 @@ nhanes_small <- rename_with(nhanes_small, snakecase::to_snake_case)
 
 # Have a look at the data frame
 nhanes_small
+
+nhanes_small <- rename(nhanes_small, sex = gender)
+nhanes_small
+
+
+# Pipeing -----------------------------------------------------------------
+colnames(nhanes_small)
+nhanes_small %>%
+  colnames()
+
+nhanes_small %>%
+  select(phys_active) %>%
+  rename(physically_active = phys_active)
+
